@@ -16,11 +16,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests().antMatchers("/getName").permitAll()
                 .and()
-                .authorizeHttpRequests().antMatchers("/get-users").hasAuthority("get-users")
+                .authorizeRequests().antMatchers("/get-users").hasAuthority("get-users")
                 .and()
-                .authorizeHttpRequests().antMatchers("/getSurname").hasAuthority("getSurname")
+                .authorizeRequests().antMatchers("/getSurname").hasAuthority("getSurname")
                 .and()
-                .authorizeHttpRequests().antMatchers("/getAge").hasAuthority("getAge")
+                .authorizeRequests().antMatchers("/getAge").hasAuthority("getAge")
                 .and()
                 .authorizeRequests().anyRequest().authenticated();
     }
