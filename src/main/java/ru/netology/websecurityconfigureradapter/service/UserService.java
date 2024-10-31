@@ -1,38 +1,40 @@
 package ru.netology.websecurityconfigureradapter.service;
 
 import org.springframework.stereotype.Service;
-import ru.netology.websecurityconfigureradapter.model.User;
+import ru.netology.websecurityconfigureradapter.entity.User;
+import ru.netology.websecurityconfigureradapter.repository.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
-    private static List<User> users = new ArrayList<>();
+    private final UserRepository repository;
 
-    static {
-        users.add(new User(1, "Georgiy", "Petrov", 19));
-        users.add(new User(2, "Anna", "Ivanova", 30));
-        users.add(new User(3, "Ekaterina", "Sidorova", 39));
-        users.add(new User(4, "Evgeniy", "Bychik", 40));
-        users.add(new User(5, "Aleksandr", "Shvedov", 51));
-        users.add(new User(6, "Ivan", "Ivanov", 25));
+    public UserService(UserRepository repository) {
+        this.repository = repository;
     }
-
 
     public List<User> getUsers() {
-        return users.stream().toList();
+        return repository.findAll();
     }
 
-    public String getName(int id) {
-        return users.get(id).getName();
+    public String getName(Long id) {
+        Optional<User> userOptional = repository.findById(id);
+        String name = userOptional.get().getName();
+        return name;
     }
 
-    public int getAge(int id) {
-        return users.get(id).getAge();
+    public int getAge(Long id) {
+        Optional<User> userOptional = repository.findById(id);
+        int age = userOptional.get().getAge();
+        return age;
     }
 
-    public String getSurname(int id) {
-        return users.get(id).getSurname();
+    public String getSurname(Long id) {
+        Optional<User> userOptional = repository.findById(id);
+        String surname = userOptional.get().getSurname();
+        return surname;
     }
 }
